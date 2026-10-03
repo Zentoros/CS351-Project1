@@ -1,46 +1,188 @@
 # Awrecking Goals
 
-A client-only React SPA for a fictitious athletic footwear store. Built with React, Vite, Bootstrap 5, custom CSS, and Lucide icons. No server, database, real authentication, checkout, or payments.
+Awrecking Goals is a responsive online athletic footwear store built as a React single-page application. The website includes 25 original shoe designs for women, men, and unisex customers across running, basketball, cleats, tennis, and training categories.
 
-## Run locally
+This project was created for CS 351 Project 1. It is a fictitious student storefront and does not process real orders, payments, or user accounts.
 
-Install Node.js, open this folder in VS Code, and run:
+## Live Website
 
-```sh
-npm ci
+[View Awrecking Goals on Google Cloud](https://storage.googleapis.com/dist_bucket_bruh/index.html)
+
+## Features
+
+- Responsive homepage with women’s and men’s shopping links
+- 25 original athletic footwear products
+- Women’s, men’s, and unisex products
+- Running, basketball, cleats, tennis, and training categories
+- Product filtering by audience and category
+- Individual product-detail pages
+- Required size and color selection
+- Shopping-cart item count
+- Quantity increase and decrease controls
+- Product-removal controls
+- Cart line totals and subtotal
+- Account sign-in form with client-side validation
+- Create-account form with client-side validation
+- Optional address and telephone fields with validation
+- Responsive Bootstrap navigation
+- Mobile-friendly product grids and forms
+- Custom red and dark-gold visual design
+- Custom connected AG logo
+- Original AI-generated product images
+
+## Technologies Used
+
+- React 19
+- Vite
+- JavaScript
+- JSON
+- HTML5
+- CSS3
+- Bootstrap 5
+- Lucide React
+- Google Cloud Storage
+- GitHub
+
+## Application Pages
+
+### Home
+
+The homepage introduces the Awrecking Goals brand and provides links to women’s products, men’s products, featured shoes, and each footwear category.
+
+### Shop
+
+The Shop page displays the complete catalog of 25 products. Products can be filtered by audience and category.
+
+### Product Details
+
+Each product has an individual detail page containing its image, name, category, price, description, rating, sizes, colors, features, specifications, and care information.
+
+### Account
+
+The Account page includes a demonstration sign-in form. The form checks that the required fields are completed before allowing submission.
+
+### Create Account
+
+The Create Account page validates the required username, password, email address, and password-confirmation fields. Optional address and telephone information is also validated when entered.
+
+### Cart
+
+The Cart page displays each selected product, size, color, quantity, price, line total, and subtotal. Customers can increase quantities, decrease quantities, or remove products.
+
+## Project Architecture
+
+Awrecking Goals is a client-side React single-page application. It does not use a backend or database.
+
+Product information is stored in `src/data/products.json`. React components receive product information through props, and the product catalog is rendered with the JavaScript `.map()` method.
+
+React’s `useState` hook manages the shopping cart, product selections, form fields, quantities, and navigation state. Cart information is temporary and resets when the page is refreshed.
+
+The website uses hash-based navigation so its pages work when hosted as a static website on Google Cloud Storage.
+
+## Reusable Components
+
+- `Navbar` provides the primary website navigation.
+- `Footer` provides secondary navigation and project information.
+- `ProductList` receives products through props and maps them into a product grid.
+- `ProductCard` displays the summary information for each product.
+- Product-detail components display complete information for a selected product.
+- Cart components display product variants, quantities, and prices.
+- Form components collect and validate account information.
+
+## Project Structure
+
+```text
+Awrecking-Goals/
+├── dist/                       Production website files
+├── docs/                       Wiki drafts and AI prompt records
+├── public/
+│   └── images/                 Logo, hero image, and product images
+├── src/
+│   ├── components/
+│   │   └── Products.jsx        ProductList and ProductCard components
+│   ├── data/
+│   │   └── products.json       Product catalog
+│   ├── utils/
+│   │   └── validation.js       Form-validation functions
+│   ├── App.jsx                 Pages, navigation, and cart state
+│   ├── main.jsx                React entry point
+│   └── styles.css              Custom styling and responsive rules
+├── .gitignore
+├── index.html
+├── package.json
+├── package-lock.json
+├── README.md
+└── vite.config.js
+```
+
+## Running the Project Locally
+
+Node.js and npm must be installed.
+
+1. Download or clone the repository.
+2. Open the `Awrecking-Goals` folder in Visual Studio Code.
+3. Open a terminal in the project folder.
+4. Install the dependencies:
+
+```bash
+npm install
+```
+
+5. Start the Vite development server:
+
+```bash
 npm run dev
 ```
 
-Open the URL shown in the terminal. To prepare a static deployment:
+6. Open the localhost URL displayed in the terminal.
 
-```sh
+On Windows PowerShell, use these commands if PowerShell blocks the standard npm script:
+
+```powershell
+npm.cmd install
+npm.cmd run dev
+```
+
+## Creating a Production Build
+
+Run:
+
+```bash
 npm run build
 ```
 
-Upload the **contents of dist/** to your static host. The ZIP includes a ready-built dist folder. Hash routes keep product and account links working on static hosts without server routing rules. Node.js is used only for development/build tooling; the published app runs entirely in the browser.
+Vite creates the production files inside the `dist` folder. The contents of `dist` are uploaded to the Google Cloud Storage bucket.
 
-## Pages and implementation
+The Vite configuration uses a relative base path so the JavaScript and CSS assets load correctly from the Cloud Storage bucket.
 
-- Home, Shop, Product Detail, Account, Create Account and Cart views.
-- 25 fully populated product records in src/data/products.json. Five sport categories share a consistent footwear schema. The catalog has 12 women's styles, 12 men's styles and one unisex style, with 25 distinct AI-generated shoe designs. Each has a single pictured colorway. Women and Men filters each include the shared unisex style. Prices, specifications, ratings and stock are fictitious demonstration data.
-- ProductList accepts products through props and uses .map() to create ProductCard components.
-- App owns cart useState. Exact product/size/color selections merge; different variants remain separate. Cart and CartItem use props, render through .map(), calculate line totals/subtotal and derive navbar count. Invalid quantity and missing option selections are blocked.
-- Password, confirmation, username and email validation; optional full U.S. address and phone validation. Login validates presence only. Form success clearly indicates that no real account is created. Credentials are never stored.
-- Bootstrap responsive grid, navbar breakpoint and form classes; custom mobile menu and responsive CSS. Red and dark gold form the store palette. Women's and men's collections have equal homepage prominence and correct labeled US size systems.
-- Cart is intentionally session-only React state and resets on refresh.
+## Responsive Design
 
-## Submission work still required
+Bootstrap 5 provides responsive containers, grids, navigation, forms, and buttons. Custom CSS media queries adjust the page layout for smaller screens. Product grids change their number of columns based on screen width, and the navigation menu changes to a mobile layout below the large-screen breakpoint.
 
-1. Read and understand the code, personalize it, and disclose AI assistance.
-2. Create your GitHub repository; upload source files, package.json, package-lock.json, public/, src/, docs/ and Vite configuration. Exclude node_modules/, .env files and .openai/.
-3. Deploy the contents of dist/ to **Google Cloud**, as specified by your course. Set index.html as the main page for the course's static hosting configuration. Use the hosting instructions provided by your instructor and verify the URL is accessible to your grader.
-4. Copy docs/wiki/*.md to GitHub Wiki pages. Replace placeholders with your actual URLs.
-5. Run the requested HTML/CSS validators and attach their real results; no validator results have been fabricated.
-6. Add real desktop/mobile screenshots and record the blank, partial, invalid and valid account form demo video. Upload it and paste its URL.
-7. Submit your Google Cloud URL and GitHub repository URL to Canvas.
+The website was reviewed on desktop and mobile screen sizes.
 
-See docs/wiki/ for editable documentation drafts. This work is AI-assisted and must be disclosed in your submission.
+## Validation
 
-The Cleats category contains the five soccer-cleat designs and has a direct header link, homepage sport link, shop filter and footer link. Legacy Soccer category links resolve to Cleats.
+HTML and CSS validation evidence is documented in the project’s GitHub Wiki. The Wiki includes screenshots of the validation results, explanations of errors encountered, and descriptions of corrections made during development.
 
-The custom connected AG logo follows the owner's sketch and appears in the header, footer, browser icon and all 25 shoe images. Branding prompts and AI disclosure are included in docs/.
+## Project Limitations
+
+- The project does not use a backend or database.
+- Account information is not saved.
+- The sign-in page is for demonstration purposes only.
+- Shopping-cart information resets when the page is refreshed.
+- The store does not accept payments or place real orders.
+- Each product currently displays one pictured colorway.
+- Product images represent fictitious student-designed footwear.
+
+## AI Assistance Disclosure
+
+Generative AI assistance was used during the development of this project.
+
+AI was used to help create the initial website template and React project structure. It assisted with organizing reusable components, implementing the product catalog, creating the shopping-cart interface, developing the account forms, and refining the responsive red and dark-gold design. The generated code was reviewed, tested, edited, and adapted for the requirements of this project.
+
+AI was also used during debugging. This included helping diagnose npm setup errors, identifying incorrect project-folder paths, correcting Google Cloud deployment paths, configuring Vite to use relative asset paths, and troubleshooting the white-screen deployment problem.
+
+The original concept for the connected AG logo was based on my own sketch. AI image-generation tools were used to refine the logo into a finished digital asset and to create the fictitious product, hero, and footwear images. AI image editing was also used to place the AG branding on the shoe designs. The image-generation and branding prompts used for the project are documented in the `docs` folder.
+
+AI assistance was used as a development and design tool. The final project was reviewed and organized to meet the assignment requirements.
